@@ -1,29 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Gamedev Canvas Workshop</title>
+    <meta name="viewport" content="height=device-height,width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>eXCom pinball mobile game</title>
     <style>
+        html, body {height: 100%; width: 100%}
         * { padding: 0; margin: 0; }
-        canvas { background: #eee; display: block; margin: 0 auto; }
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
 
-<canvas id="myCanvas" width="480" height="320"></canvas>
-<div>X: <span id="x-coordinate"></span></div>
-<div>Y: <span id="y-coordinate"></span></div>
+<canvas id="myCanvas" style="height: 100vh; width: calc(100vh * 0.5625);"></canvas>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     let canvas = document.getElementById("myCanvas");
+    let worldHeight;
+    let worldWidth;
+
+    worldHeight = window.innerHeight;
+    canvas.setAttribute('height', worldHeight)
+    worldWidth = worldHeight * 0.5625;
+    canvas.setAttribute('width', worldWidth)
+
     let ctx = canvas.getContext("2d");
 
-    let xCoordinateSpan = document.getElementById("x-coordinate");
-    let yCoordinateSpan = document.getElementById("y-coordinate");
-
-    let x = canvas.width/2;   // ball X position
-    let y = canvas.height-30; // ball Y position
-    let ballSpeedModifier = 0.3; // BALL SPEED
+    let x = canvas.width / 2;   // ball X position
+    let y = canvas.height - canvas.height * 0.2; // ball Y position
+    let ballSpeedModifier = 0.003; // BALL SPEED
     let dx = Math.sqrt(ballSpeedModifier / 2);  //ballSpeedX
     let dy = -Math.sqrt(ballSpeedModifier / 2); //ballSpeedY
     let ballRadius = 15;
@@ -122,14 +132,9 @@
             dy = -Math.sqrt(ballSpeedModifier - (dx*dx));
         }
 
-        console.log("Angle Coefficient: " + angleCoefficient);
+        //console.log("Angle Coefficient: " + angleCoefficient);
 
-        console.log("dy: " + dy);
-    }
-
-    function updateBallCoordinatesInSpan(){
-        xCoordinateSpan.textContent = x;
-        yCoordinateSpan.textContent = y;
+        //console.log("dy: " + dy);
     }
 
     function draw() {
@@ -140,7 +145,6 @@
         drawScore();
         drawLives();
         collisionDetection();
-        //updateBallCoordinatesInSpan();
 
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
             hitWall();
@@ -285,6 +289,7 @@
     }
 
     draw();
+});
 </script>
 
 </body>
