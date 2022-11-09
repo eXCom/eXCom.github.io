@@ -215,6 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keyup", keyUpHandler, false);
     document.addEventListener("mousemove", mouseMoveHandler, false);
     fullScreenModeBtn.addEventListener("click", function(){
+        if(window.innerHeight > window.innerWidth){
+            canvas.setAttribute("style", "transform: rotate(270deg);");
+        }
         toggleFullscreen();
     });
 
@@ -305,6 +308,12 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.requestFullscreen().catch((err) => {
                 alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
             });
+            /*if(true){
+                canvas.setAttribute("style", "transform: rotate(270deg);");
+            }*/
+
+            //window.innerHeight
+
         } else {
             document.exitFullscreen();
         }
