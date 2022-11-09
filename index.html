@@ -12,15 +12,23 @@
             display: block;
             margin: 0 auto;
         }
+        #fullScreenMode {
+            height: 5%;
+            width: 20%;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
 
-<canvas id="myCanvas" style="height: 91vh; width: calc(100vh * 0.5625);"></canvas>
+<button id="fullScreenMode">Play FullScreen</button>
+<canvas id="myCanvas" style="height: 100vh; width: calc(100vh * 0.5625);"></canvas>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     let canvas = document.getElementById("myCanvas");
+    let fullScreenModeBtn = document.getElementById("fullScreenMode");
     let worldHeight;
     let worldWidth;
 
@@ -37,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let ballSpeedModifier = worldHeight / 1000000 * ballSpeed; // BALL BASE SPEED
     let dx = Math.sqrt(ballSpeedModifier / 2);  //ballSpeedX
     let dy = -Math.sqrt(ballSpeedModifier / 2); //ballSpeedY
-    let ballRadius = worldHeight / 1000 * 10;
+    let ballRadius = worldHeight / 1000 * 100;
     let paddleSpeed = 5;   //Paddle Speed
     let paddleHeight = 25; //Paddle Height
     let paddleWidth = 150;  //Paddle Width
@@ -206,6 +214,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     document.addEventListener("mousemove", mouseMoveHandler, false);
+    fullScreenModeBtn.addEventListener("click", function(){
+        toggleFullscreen();
+    });
 
     function mouseMoveHandler(e) {
         let relativeX = e.clientX - canvas.offsetLeft;
