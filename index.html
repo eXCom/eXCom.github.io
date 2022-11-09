@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let x = canvas.width / 2;   // ball X position
     let y = canvas.height - canvas.height * 0.2; // ball Y position
-    let ballSpeedModifier = 0.003; // BALL SPEED
+    let ballSpeed = 1000;
+    let ballSpeedModifier = worldHeight / 1000000 * ballSpeed; // BALL BASE SPEED
     let dx = Math.sqrt(ballSpeedModifier / 2);  //ballSpeedX
     let dy = -Math.sqrt(ballSpeedModifier / 2); //ballSpeedY
     let ballRadius = 15;
@@ -277,16 +278,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function drawScore() {
-        ctx.font = "16px Arial";
+        ctx.font = "1rem Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Score: "+score, 8, 20);
     }
 
     function drawLives() {
-        ctx.font = "16px Arial";
+        ctx.font = "1rem Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Lives: "+lives, canvas.width-65, 20);
     }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            canvas.requestFullscreen().catch((err) => {
+                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+    //toggleFullscreen();
 
     draw();
 });
