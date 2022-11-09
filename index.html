@@ -33,11 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let x = canvas.width / 2;   // ball X position
     let y = canvas.height - canvas.height * 0.2; // ball Y position
-    let ballSpeed = 1000;
+    let ballSpeed = 5000;
     let ballSpeedModifier = worldHeight / 1000000 * ballSpeed; // BALL BASE SPEED
     let dx = Math.sqrt(ballSpeedModifier / 2);  //ballSpeedX
     let dy = -Math.sqrt(ballSpeedModifier / 2); //ballSpeedY
-    let ballRadius = 15;
+    let ballRadius = worldHeight / 1000 * 10;
     let paddleSpeed = 5;   //Paddle Speed
     let paddleHeight = 25; //Paddle Height
     let paddleWidth = 150;  //Paddle Width
@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let angleCoefficient = 0;
 
     let brickRowCount = 3;
-    let brickColumnCount = 4;
-    let brickWidth = 50;
-    let brickHeight = 50;
-    let brickPadding = 10;
-    let brickOffsetTop = 60;
-    let brickOffsetLeft = 30;
+    let brickColumnCount = 7;
+    let brickWidth = worldWidth / 100 * 10;
+    let brickHeight = worldWidth / 100 * 10;
+    let brickPadding = worldWidth / 100 * 3.4;
+    let brickOffsetTop = worldWidth / 100 * 7;
+    let brickOffsetLeft = worldWidth / 100 * 5;
 
     let ballColor = '#0095DD';
     let score = 0;
