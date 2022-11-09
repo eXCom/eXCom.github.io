@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" style="height: 95vh; width: calc(100vh * 0.5625);"></canvas>
+<canvas id="myCanvas" style="height: 90vh; width: calc(100vh * 0.5625);"></canvas>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawBricks() {
         for(let c=0; c<brickColumnCount; c++) {
             for(let r=0; r<brickRowCount; r++) {
-                if(bricks[c][r].status == 1) {
+                if(bricks[c][r].status === 1) {
                     let brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                     let brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                     bricks[c][r].x = brickX;
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if(y + dy > canvas.height-ballRadius) {
             if(x > paddleX && x < paddleX + paddleWidth) {
                 // Bouncing off the paddle
-                let angleMultiplier = ((x - paddleX) / paddleWidth).toFixed(2);
+                //let angleMultiplier = ((x - paddleX) / paddleWidth).toFixed(2);
 
                 //setNewDirectionSpeed(angleMultiplier);
             }
@@ -220,19 +220,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function keyDownHandler(e) {
-        if(e.key == "Right" || e.key == "ArrowRight") {
+        if(e.key === "Right" || e.key === "ArrowRight") {
             rightPressed = true;
         }
-        else if(e.key == "Left" || e.key == "ArrowLeft") {
+        else if(e.key === "Left" || e.key === "ArrowLeft") {
             leftPressed = true;
         }
     }
 
     function keyUpHandler(e) {
-        if(e.key == "Right" || e.key == "ArrowRight") {
+        if(e.key === "Right" || e.key === "ArrowRight") {
             rightPressed = false;
         }
-        else if(e.key == "Left" || e.key == "ArrowLeft") {
+        else if(e.key === "Left" || e.key === "ArrowLeft") {
             leftPressed = false;
         }
     }
@@ -243,12 +243,12 @@ document.addEventListener("DOMContentLoaded", () => {
         for(let c=0; c<brickColumnCount; c++) {
             for(let r=0; r<brickRowCount; r++) {
                 let b = bricks[c][r];
-                if(b.status == 1) {
+                if(b.status === 1) {
                     if(x > b.x && x < b.x+brickWidth && y+ballRadius > b.y && y-ballRadius < b.y+brickHeight) {
                         dy = -dy;
                         b.status = 0;
                         score += scorePerBrick;
-                        if(score == brickRowCount*brickColumnCount*scorePerBrick) {
+                        if(score === brickRowCount*brickColumnCount*scorePerBrick) {
                             victory();
                         }
                         needToBreakBrickCollisionLoop = true;
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         dx = -dx;
                         b.status = 0;
                         score += scorePerBrick;
-                        if(score == brickRowCount*brickColumnCount*scorePerBrick) {
+                        if(score === brickRowCount*brickColumnCount*scorePerBrick) {
                             victory();
                         }
                         needToBreakBrickCollisionLoop = true;
