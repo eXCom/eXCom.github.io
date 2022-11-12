@@ -214,13 +214,26 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     document.addEventListener("mousemove", mouseMoveHandler, false);
-    canvas.addEventListener('touchmove', mouseMoveHandler);
+    document.addEventListener('touchmove', touchMoveHandler, false);
     fullScreenModeBtn.addEventListener("click", function(){
         if(window.innerHeight > window.innerWidth){
             canvas.setAttribute("style", "transform: rotate(270deg);");
         }
         toggleFullscreen();
     });
+
+    function touchMoveHandler(e){
+        let relativeX = e.touches[0].clientX - canvas.offsetLeft;
+        if(relativeX > 0 && relativeX < canvas.width) {
+            if(relativeX - paddleWidth/2 < 0){
+                paddleX = 0;
+            } else if(relativeX + paddleWidth/2 > canvas.width){
+                paddleX = canvas.width - paddleWidth;
+            } else {
+                paddleX = relativeX - paddleWidth/2;
+            }
+        }
+    }
 
     function mouseMoveHandler(e) {
         let relativeX = e.clientX - canvas.offsetLeft;
