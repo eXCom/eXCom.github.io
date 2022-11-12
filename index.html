@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let ballSpeedModifier = worldHeight / 1000000 * ballSpeed; // BALL BASE SPEED
     let dx = Math.sqrt(ballSpeedModifier / 2);  //ballSpeedX
     let dy = -Math.sqrt(ballSpeedModifier / 2); //ballSpeedY
-    let ballRadius = worldHeight / 1000 * 10;
+    let ballRadius = worldHeight / 1000 * 20;
     let paddleSpeed = 5;   //Paddle Speed
     let paddleHeight = 25; //Paddle Height
     let paddleWidth = 150;  //Paddle Width
@@ -223,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function mouseMoveHandler(e) {
-        console.log('Moving?');
         let relativeX = e.clientX - canvas.offsetLeft;
         if(relativeX > 0 && relativeX < canvas.width) {
             if(relativeX - paddleWidth/2 < 0){
