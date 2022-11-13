@@ -12,17 +12,22 @@
             display: block;
             margin: 0 auto;
         }
-        #fullScreenMode {
+
+        .fullScreenMode {
             height: 5%;
             width: 20%;
             display: block;
             margin: 0 auto;
         }
+
+        .hidden {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
 
-<button id="fullScreenMode">Play FullScreen</button>
+<button id="fullScreenMode" class="fullScreenMode">Play FullScreen</button>
 <canvas id="myCanvas" style="height: 100vh; width: calc(100vh * 0.5625);"></canvas>
 
 <script>
@@ -220,6 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.setAttribute("style", "transform: rotate(270deg);");
         }
         toggleFullscreen();
+        document.getElementById("fullScreenMode").style.display = "none";
     });
 
     function touchMoveHandler(e){
@@ -319,9 +325,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function toggleFullscreen() {
         if (!document.fullscreenElement) {
-            canvas.requestFullscreen().catch((err) => {
+            document.body.requestFullscreen().catch((err) => {
                 alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
             });
+
             /*if(true){
                 canvas.setAttribute("style", "transform: rotate(270deg);");
             }*/
